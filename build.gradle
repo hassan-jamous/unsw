@@ -2,8 +2,9 @@ group 'unsw'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
-
-sourceCompatibility = 1.5
+apply plugin: 'checkstyle'
+apply plugin:'application'
+mainClassName = "application.Application"
 
 repositories {
     mavenCentral()
@@ -11,4 +12,14 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+checkstyle {
+    toolVersion = "7.0"
+}
+checkstyleMain {
+    configFile = rootProject.file('buildsupport/checkstyle/checkstyle-main.xml')
+}
+checkstyleTest {
+    configFile = rootProject.file('buildsupport/checkstyle/checkstyle-test.xml')
 }

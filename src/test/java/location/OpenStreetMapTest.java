@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class OpenStreetMapTest {
 
-    OpenStreetMap openStreetMapUnderTest = new OpenStreetMap();
+    private OpenStreetMap openStreetMapUnderTest = new OpenStreetMap();
 
     @Test
     public void addressProvided_CorrectCoordinatesReturned() throws Exception {

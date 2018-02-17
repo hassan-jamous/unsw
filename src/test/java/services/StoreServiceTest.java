@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class StoreServiceTest {
 
-    StoreService storeServiceUnderTest = new StoreService();
+    private StoreService storeServiceUnderTest = new StoreService();
 
     @Test
     public void storeNameProvided_CorrectStoreAddressReturned() throws Exception {

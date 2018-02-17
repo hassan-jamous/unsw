@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class GoogleMapsTest {
 
-    GoogleMaps googleMapsUnderTest = new GoogleMaps();
+    private GoogleMaps googleMapsUnderTest = new GoogleMaps();
 
     @Test
     public void addressProvided_CorrectCoordinatesReturned() throws Exception {
