@@ -1,17 +1,31 @@
 package services;
 
+import interfaces.WorldMap;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class StoreServiceTest {
+    private static final String COLES_NEUTRAL_BAY = "Coles Neutral Bay";
+    @Mock
+    private WorldMap worldMap;
+    @InjectMocks
+    private StoreService storeServiceUnderTest;
 
-    StoreService storeServiceUnderTest = new StoreService();
+    @Before
+    public void prepareMock() {
+        when(worldMap.getCoordinatesFromAddress(COLES_NEUTRAL_BAY)).thenReturn("-33.829548,151.21848");
+    }
 
     @Test
     public void storeNameProvided_CorrectStoreAddressReturned() throws Exception {
-        assertEquals("store location is: -33.829548,151.218482", storeServiceUnderTest.getStoreLocation("Coles Neutral Bay"));
-        assertEquals("store location is: -33.830521,151.222502", storeServiceUnderTest.getStoreLocation("Woolworths Neutral Bay"));
-        assertEquals("store location is: -33.830173,151.219215", storeServiceUnderTest.getStoreLocation("The Oaks Neutral Bay"));
+        assertEquals("store location is: -33.829548,151.21848", storeServiceUnderTest.getStoreLocation(COLES_NEUTRAL_BAY));
     }
 }

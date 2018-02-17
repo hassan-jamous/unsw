@@ -1,11 +1,16 @@
 package services;
 
-import location.GoogleMaps;
+import interfaces.WorldMap;
 
 public class StoreService {
+    private WorldMap worldMap;
 
     public String getStoreLocation(String storeName) {
-        GoogleMaps googleMaps = new GoogleMaps();
-        return "store location is: " + googleMaps.getCoordinatesFromAddress(storeName);
+        return "store location is: " + worldMap.getCoordinatesFromAddress(storeName);
+    }
+
+    public void setWorldMap(WorldMap worldMap) {
+        this.worldMap = worldMap;
     }
 }
+
