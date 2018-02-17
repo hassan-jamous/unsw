@@ -1,7 +1,6 @@
 package application;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import services.StoreService;
 
 import java.util.logging.Logger;
@@ -13,8 +12,8 @@ public final class Application {
     }
 
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext(
-                "SpringBeans.xml");
+        AnnotationConfigApplicationContext context = new
+                AnnotationConfigApplicationContext(SpringApplicationConfiguration.class);
 
         StoreService ss = (StoreService) context.getBean("storeService");
         LOGGER.info(ss.getStoreLocation("Coles Neutral Bay"));
