@@ -1,30 +1,32 @@
 package application;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
-import services.StoreService;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
-import java.util.logging.Logger;
 
 @Configuration
-@ComponentScan("location,services")
+@EnableWebMvc
+@ComponentScan("location,services,controllers")
 @SuppressWarnings("hideutilityclassconstructor")
 public class SpringApplication {
-
-    private static final Logger LOGGER = Logger.getLogger(SpringApplication.class.getName());
-
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
-    public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new
-                AnnotationConfigApplicationContext(SpringApplication.class);
 
-        StoreService ss = (StoreService) context.getBean("storeService");
-        LOGGER.info(ss.getStoreLocation("Coles Neutral Bay"));
+    @Bean
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setViewClass(JstlView.class);
+        viewResolver.setPrefix("/WEB-INF/views/");
+        viewResolver.setSuffix(".jsp");
+
+        return viewResolver;
     }
 }
