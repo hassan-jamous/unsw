@@ -9,13 +9,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
@@ -33,7 +34,7 @@ public class GoogleMapsTest {
     @Before
     public void prepareMock() {
         LocationServiceRoot locationServiceRoot = buildLocationServiceResponse();
-        when(restTemplate.getForObject(anyString(), anyObject())).thenReturn(locationServiceRoot);
+        when(restTemplate.getForObject(anyString(), any())).thenReturn(locationServiceRoot);
     }
 
     @Test
