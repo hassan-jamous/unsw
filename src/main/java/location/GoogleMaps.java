@@ -1,7 +1,6 @@
 package location;
 
 import domain.LocationServiceRoot;
-import domain.Result;
 import interfaces.WorldMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,7 +17,9 @@ public class GoogleMaps implements WorldMap {
     private RestTemplate restTemplate;
 
     public String getCoordinatesFromAddress(String address) {
-        LocationServiceRoot result = restTemplate.getForObject(COORDINATE_SERVICE_ENDPOINT + "?address=" + address + "&key=" + API_KEY, LocationServiceRoot.class);
+        LocationServiceRoot result = restTemplate.getForObject(
+                COORDINATE_SERVICE_ENDPOINT + "?address=" + address + "&key="
+                        + API_KEY, LocationServiceRoot.class);
         return getCoordinatesFromServiceResponse(result);
     }
 
