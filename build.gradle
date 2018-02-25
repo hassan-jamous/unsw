@@ -1,10 +1,16 @@
 group 'unsw'
 
-
-apply plugin: 'war'
 apply plugin: 'checkstyle'
-apply plugin: 'application'
-mainClassName = "application.SpringApplication"
+apply plugin: 'org.springframework.boot'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.10.RELEASE")
+    }
+}
 
 repositories {
     mavenCentral()
@@ -39,10 +45,10 @@ configurations {
 }
 
 dependencies {
-    compile "org.springframework:spring-context:${springVersion}"
-    compile "org.springframework:spring-web:${springVersion}"
-    compile "org.springframework:spring-webmvc:${springVersion}"
-    compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    compile "org.apache.tomcat.embed:tomcat-embed-jasper"
+    compile 'org.springframework.boot:spring-boot-starter-tomcat'
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "com.fasterxml.jackson.core:jackson-databind"
     compile "org.projectlombok:lombok:${lombokVersion}"
     compile "javax.servlet:javax.servlet-api:${servletApiVersion}"
     compile "javax.servlet.jsp:javax.servlet.jsp-api:${jspApiVersion}"
@@ -50,8 +56,6 @@ dependencies {
     testCompile "junit:junit:${junitVersion}"
     testCompile "org.mockito:mockito-core:${mockitoVersion}"
     integrationTestCompile "org.springframework:spring-test:${springVersion}"
-
-
 }
 
 checkstyle {

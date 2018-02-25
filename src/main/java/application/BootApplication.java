@@ -1,20 +1,24 @@
 package application;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-
-@Configuration
 @EnableWebMvc
-@ComponentScan("location,services,controllers")
+@SpringBootApplication
+@ComponentScan("location,services,controllers,application")
 @SuppressWarnings("hideutilityclassconstructor")
-public class SpringApplication {
+public class BootApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(BootApplication.class, args);
+    }
+
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();

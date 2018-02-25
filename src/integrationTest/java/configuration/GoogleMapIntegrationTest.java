@@ -1,6 +1,6 @@
 package configuration;
 
-import application.SpringApplication;
+import application.BootApplication;
 import interfaces.WorldMap;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = SpringApplication.class)
+@ContextConfiguration(classes = BootApplication.class)
 public class GoogleMapIntegrationTest {
     @Autowired
     @Qualifier("googleMaps")
