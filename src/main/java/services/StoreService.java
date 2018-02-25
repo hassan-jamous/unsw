@@ -1,6 +1,8 @@
 package services;
 
+import domain.Location;
 import interfaces.WorldMap;
+import location.StoreAddressMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -11,8 +13,11 @@ public class StoreService {
     @Qualifier("googleMaps")
     private WorldMap worldMap;
 
-    public String getStoreLocation(String storeName) {
-        return "store location is: " + worldMap.getCoordinatesFromAddress(storeName);
+    @Autowired
+    private StoreAddressMapper storeAddressMapper;
+
+    public Location getStoreLocation(String storeName) {
+        return worldMap.getCoordinatesFromAddress(storeAddressMapper.getStoreAddress(storeName));
     }
 }
 

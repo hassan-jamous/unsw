@@ -22,9 +22,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GoogleMapsTest {
-    public static final String EXPECTED_LAT = "-33.829548";
-    public static final String EXPECTED_LNG = "151.21848";
-    public static final String EXPECTED_RESULT = "-33.829548,151.21848";
+    public static final Location EXPECTED_LOCATION = new Location("-33.829548", "151.21848");
     @Mock
     private RestTemplate restTemplate;
     @InjectMocks
@@ -38,16 +36,12 @@ public class GoogleMapsTest {
 
     @Test
     public void addressProvided_CorrectCoordinatesReturned() throws Exception {
-        assertEquals(EXPECTED_RESULT, googleMapsUnderTest.getCoordinatesFromAddress("92 ben boyed road, Sydney"));
+        assertEquals(EXPECTED_LOCATION, googleMapsUnderTest.getCoordinatesFromAddress("92 ben boyed road, Sydney"));
     }
 
     private LocationServiceRoot buildLocationServiceResponse() {
-        Location location = new Location();
-        location.setLat(EXPECTED_LAT);
-        location.setLng(EXPECTED_LNG);
-
         Geometry geometry = new Geometry();
-        geometry.setLocation(location);
+        geometry.setLocation(EXPECTED_LOCATION);
 
         Result result = new Result();
         result.setGeometry(geometry);

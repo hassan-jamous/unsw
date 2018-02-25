@@ -1,5 +1,7 @@
 package interfaces;
 
+import domain.Location;
+
 public interface WorldMap {
-    String getCoordinatesFromAddress(String address);
+    Location getCoordinatesFromAddress(String address);
 }

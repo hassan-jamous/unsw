@@ -1,5 +1,6 @@
 package location;
 
+import domain.Location;
 import domain.LocationServiceRoot;
 import interfaces.WorldMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +17,14 @@ public class GoogleMaps implements WorldMap {
     @Autowired
     private RestTemplate restTemplate;
 
-    public String getCoordinatesFromAddress(String address) {
+    public Location getCoordinatesFromAddress(String address) {
         LocationServiceRoot result = restTemplate.getForObject(
                 COORDINATE_SERVICE_ENDPOINT + "?address=" + address + "&key="
                         + API_KEY, LocationServiceRoot.class);
-        return getCoordinatesFromServiceResponse(result);
+        return getLocation(result);
     }
 
-    private String getCoordinatesFromServiceResponse(LocationServiceRoot serviceResponse) {
-        String lat = serviceResponse.getResults().get(0).getGeometry().getLocation().getLat();
-        String lng = serviceResponse.getResults().get(0).getGeometry().getLocation().getLng();
-        return lat + "," + lng;
+    private Location getLocation(LocationServiceRoot serviceResponse) {
+        return serviceResponse.getResults().get(0).getGeometry().getLocation();
     }
 }

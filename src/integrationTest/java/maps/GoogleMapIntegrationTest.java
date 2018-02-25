@@ -1,6 +1,7 @@
-package configuration;
+package maps;
 
 import application.BootApplication;
+import domain.Location;
 import interfaces.WorldMap;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +23,8 @@ public class GoogleMapIntegrationTest {
 
     @Test
     public void addressProvided_GoogleMapServiceIsCalled_CorrectCoordinatesReturned() throws Exception {
-        assertEquals("-33.8353026,151.2165052", googleMap.getCoordinatesFromAddress("92 Ben Boyd Rd, Neutral Bay NSW 2089"));
+        Location location = googleMap.getCoordinatesFromAddress("92 Ben Boyd Rd, Neutral Bay NSW 2089");
+        assertEquals("-33.8353026", location.getLat());
+        assertEquals("151.2165052", location.getLng());
     }
-
 }
